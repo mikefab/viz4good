@@ -3,8 +3,42 @@ import React, { Component } from 'react';
 import App1 from './components/demo-app2/src/app';
 
 class App extends Component {
+  state = {
+    keplerJson: null,
+    thing: 'zzzz'
+
+  };
+
+  componentDidMount() {
+    // fetch('/public/keplergl.json')
+    fetch('/api/url')
+    .then(response => response.json())
+    .then(keplerJson => {
+      console.log('Data arrived')
+      let lookup = {}
+      keplerJson.datasets[0].data.allData.forEach(e => {
+
+        if (e[0].length > 100) {
+          let feature = JSON.parse(e[0])
+          lookup[feature.properties.cle] = e[0]
+        } else {
+          e[0] = lookup[e[0]]
+        }
+      })
+      this.state.keplerJson = keplerJson
+      this.state.thing = 'xxxxXXXx'
+      console.log('about to render!')
+      this.setState({
+        keplerJSON: keplerJson
+      })
+    })
+  }
 
   render() {
+        console.log(!!this.state.keplerJson, '&&&&')
+        console.log(this.state, '!!!!')
+        let keplerJson = this.state.keplerJson
+        let thing = this.state.thing
         let templates = [];
         templates.push(
           <div>
@@ -20,7 +54,7 @@ class App extends Component {
                 <div class="mdc-layout-grid__cell">First level</div>
               </div>
             </div>
-            <App1 />
+            <App1 keplerJson = {keplerJson} thing={thing}/>
           </div>
         );
     return (

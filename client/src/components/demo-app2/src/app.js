@@ -102,53 +102,22 @@ class App extends Component {
   };
 
 
-  // componentDidUpdate() {
-  //   const { height, width } = useWindowDimensions();
-  //   console.log(width)
-  //     // const rect = ReactDOM
-  //     //     .findDOMNode(this.targetHoopRef)
-  //     //     .getBoundingClientRect();
-  //
-  //     // console.log(rect);
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.keplerJson !== this.props.keplerJson) {
+      window.zzz = this.props.keplerJson
+      const data = Processor.processKeplerglJSON(this.props.keplerJson);
+      this.props.dispatch(
+        addDataToMap(data)
+      );
+    }
+      // const rect = ReactDOM
+      //     .findDOMNode(this.targetHoopRef)
+      //     .getBoundingClientRect();
+
+      // console.log(rect);
+  }
 
   //z.datasets[0].data.allData
-    componentDidMount() {
-      console.log(this.props)
-      // fetch('/public/keplergl.json')
-      fetch('/api/url')
-      .then(response => response.json())
-      .then(keplerJson => {
-        window.zzz = keplerJson
-        console.log('Data arrived')
-        let lookup = {}
-        keplerJson.datasets[0].data.allData.forEach(e => {
-
-          if (e[0].length > 100) {
-            let feature = JSON.parse(e[0])
-            lookup[feature.properties.cle] = e[0]
-          } else {
-            e[0] = lookup[e[0]]
-          }
-        })
-
-        const data = Processor.processKeplerglJSON(keplerJson);
-        this.props.dispatch(
-          addDataToMap(data)
-        );
-        // this.props.dispatch(
-        //   addDataToMap(data)
-        // );
-      })
-      // delay zs to show the banner
-      // if (!window.localStorage.getItem(BannerKey)) {
-      //   window.setTimeout(this._showBanner, 3000);
-      // }
-      // load sample data
-      // this._loadSampleData();
-      // Notifications
-      // this._loadMockNotifications();
-    }
 
   // componentDidMount() {
   //   // if we pass an id as part of the url
