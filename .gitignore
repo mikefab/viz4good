@@ -2,7 +2,7 @@
 =======
 node_modules
 .env
-*config.js
+config.js
 /server/public/users
 !/server/public/users/default/config-sample.json
 # config
