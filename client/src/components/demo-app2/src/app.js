@@ -324,7 +324,6 @@ class App extends Component {
     const {sharing} = this.props.demo;
     const rootNode = this.root;
     const {introHeight} = this.props;
-    console.log(introHeight, 'uuuuu')
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle

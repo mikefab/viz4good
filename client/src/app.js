@@ -77,7 +77,6 @@ class App extends Component {
                 &nbsp; {refreshed_at}
 
             </div>
-            {introHeight}
             <App1 keplerJson={keplerJson}  introHeight={introHeight}/>
           </div>
         );
