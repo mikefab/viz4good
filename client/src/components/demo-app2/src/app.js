@@ -373,7 +373,7 @@ class App extends Component {
                    */
                   getState={keplerGlGetState}
                   width={width - 40}
-                  height={height - (showBanner ? BannerHeight : 50)}
+                  height={height - (showBanner ? BannerHeight : 0)}
                   onSaveMap={this._isCloudStorageEnabled() && this._toggleCloudModal}
                 />
               )}

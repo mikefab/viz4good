@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=8080 HOST=0.0.0.0 disableHostCheck=true react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -9,7 +9,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "http://localhost:5000",
+      "target": "http://server:5000",
       "secure": false
     }
   },

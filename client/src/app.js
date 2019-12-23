@@ -5,15 +5,12 @@ import App1 from './components/demo-app2/src/app';
 class App extends Component {
   state = {
     keplerJson: null,
-    thing: 'zzzz'
-
+    created_at: null,
+    fetched_at: null
   };
 
-  componentDidMount() {
-    // fetch('/public/keplergl.json')
-    fetch('/api/url')
-    .then(response => response.json())
-    .then(keplerJson => {
+  _handleKeplerJson(keplerJson, thing, refresh) {
+    return new Promise((resolve, reject) => {
       console.log('Data arrived')
       let lookup = {}
       keplerJson.datasets[0].data.allData.forEach(e => {
@@ -25,36 +22,55 @@ class App extends Component {
           e[0] = lookup[e[0]]
         }
       })
-      this.state.keplerJson = keplerJson
-      this.state.thing = 'xxxxXXXx'
+      let refreshed_at = !!refresh ? "Last refreshed at: " + keplerJson.info.created_at : null
+      thing.state.keplerJson = keplerJson
       console.log('about to render!')
-      this.setState({
-        keplerJSON: keplerJson
+      thing.setState({
+        keplerJSON: keplerJson,
+        created_at: keplerJson.info.created_at,
+        refreshed_at: refreshed_at
       })
+    })
+
+
+  }
+
+  componentDidMount() {
+    // fetch('/public/keplergl.json')
+    fetch('/api/url')
+    .then(response => response.json())
+    .then(keplerJson => {
+      this._handleKeplerJson(keplerJson, this)
     })
   }
 
+  _refreshData = () => {
+    fetch('/api/refresh')
+    .then(response => response.json())
+    .then(keplerJson => {
+      this._handleKeplerJson(keplerJson, this, 'refresh')
+    })
+  }
   render() {
-        console.log(!!this.state.keplerJson, '&&&&')
-        console.log(this.state, '!!!!')
         let keplerJson = this.state.keplerJson
-        let thing = this.state.thing
+        let created_at = new Date(this.state.created_at).toLocaleDateString('en-US')
+        let refreshed_at = this.state.refreshed_at
         let templates = [];
         templates.push(
           <div>
-            <div class="mdc-layout-grid" style={{'border': 'solid red 1px'}}>
-              <div class="mdc-layout-grid__inner" style={{'border': 'solid green 1px'}}>
-                <div class="mdc-layout-grid__cell" style={{'border': 'solid blue 1px'}}>
-                  <div class="mdc-layout-grid__inner" style={{'border': 'solid yellow 1px'}}>
-                    <div class="mdc-layout-grid__cell"><span>Second level</span></div>
-                    <div class="mdc-layout-grid__cell"><span>Second level</span></div>
-                  </div>
-                </div>
-                <div class="mdc-layout-grid__cell">First level</div>
-                <div class="mdc-layout-grid__cell">First level</div>
-              </div>
+            <div class="mdc-layout-grid">
+                This is an animated visualization of Ebola confirmed cases in the North Kivu Ebola Outbreak in the Democratic Republic of the Congo (DRC).
+
+                The data comes from <a href='https://data.humdata.org/'>The Humanitarian Data Exchange</a>. Here is the app <a href='https://github.com/mikefab/viz4good'>code base</a>, and the <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>shapefiles</a>.
+                The data was last fetched on {created_at}.
+                <button className="mdc-button" onClick={this._refreshData}>
+                  <div className="mdc-button__ripple"></div>
+                  <span className="mdc-button__label">Click here to fetch again.</span>
+                </button>
+                &nbsp; {refreshed_at}
+
             </div>
-            <App1 keplerJson = {keplerJson} thing={thing}/>
+            <App1 keplerJson = {keplerJson} />
           </div>
         );
     return (
