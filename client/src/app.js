@@ -6,7 +6,8 @@ class App extends Component {
   state = {
     keplerJson: null,
     created_at: null,
-    fetched_at: null
+    fetched_at: null,
+    introHeight: 0
   };
 
   _handleKeplerJson(keplerJson, thing, refresh) {
@@ -36,6 +37,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+      console.log(document.getElementById('intro').clientHeight, 'lllll')
+    this.setState({
+      introHeight: parseInt(document.getElementById('intro').clientHeight)
+    })
     // fetch('/public/keplergl.json')
     fetch('/api/url')
     .then(response => response.json())
@@ -52,13 +57,15 @@ class App extends Component {
     })
   }
   render() {
+
         let keplerJson = this.state.keplerJson
         let created_at = new Date(this.state.created_at).toLocaleDateString('en-US')
         let refreshed_at = this.state.refreshed_at
+        let introHeight = this.state.introHeight
         let templates = [];
         templates.push(
           <div>
-            <div class="mdc-layout-grid">
+            <div className="mdc-layout-grid" id='intro'>
                 This is an animated visualization of Ebola confirmed cases in the North Kivu Ebola Outbreak in the Democratic Republic of the Congo (DRC).
 
                 The data comes from <a href='https://data.humdata.org/'>The Humanitarian Data Exchange</a>. Here is the app <a href='https://github.com/mikefab/viz4good'>code base</a>, and the <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>shapefiles</a>.
@@ -70,7 +77,8 @@ class App extends Component {
                 &nbsp; {refreshed_at}
 
             </div>
-            <App1 keplerJson = {keplerJson} />
+            {introHeight}
+            <App1 keplerJson={keplerJson}  introHeight={introHeight}/>
           </div>
         );
     return (

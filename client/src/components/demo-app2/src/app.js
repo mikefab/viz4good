@@ -104,7 +104,6 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.keplerJson !== this.props.keplerJson) {
-      window.zzz = this.props.keplerJson
       const data = Processor.processKeplerglJSON(this.props.keplerJson);
       this.props.dispatch(
         addDataToMap(data)
@@ -324,6 +323,8 @@ class App extends Component {
     const {showBanner} = this.state;
     const {sharing} = this.props.demo;
     const rootNode = this.root;
+    const {introHeight} = this.props;
+    console.log(introHeight, 'uuuuu')
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle
@@ -373,7 +374,7 @@ class App extends Component {
                    */
                   getState={keplerGlGetState}
                   width={width - 40}
-                  height={height - (showBanner ? BannerHeight : 0)}
+                  height={height - (showBanner ? BannerHeight : introHeight)}
                   onSaveMap={this._isCloudStorageEnabled() && this._toggleCloudModal}
                 />
               )}
