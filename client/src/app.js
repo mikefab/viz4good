@@ -64,11 +64,22 @@ class App extends Component {
         let introHeight = this.state.introHeight
         let templates = [];
         templates.push(
-          <div>
-            <div className="mdc-layout-grid" id='intro'>
+          <div >
+            <div className="mdc-layout-grid"id='intro' >
+              <p>
                 This is an animated visualization of Ebola confirmed cases in the North Kivu Ebola Outbreak in the Democratic Republic of the Congo (DRC).
-
-                The data comes from <a href='https://data.humdata.org/'>The Humanitarian Data Exchange</a>. Here is the app <a href='https://github.com/mikefab/viz4good'>code base</a>, and the <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>shapefiles</a>.
+              </p>
+              <ul>
+                <li>
+                  Data: <a href='https://data.humdata.org/'>The Humanitarian Data Exchange</a>
+                </li>
+                <li>
+                  <a href='https://github.com/mikefab/viz4good'>code base</a>
+                </li>
+                <li>
+                  <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>border</a>
+                </li>
+                </ul>
                 The data was last fetched on {created_at}.
                 <button className="mdc-button" onClick={this._refreshData}>
                   <div className="mdc-button__ripple"></div>
