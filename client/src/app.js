@@ -67,20 +67,9 @@ class App extends Component {
         templates.push(
           <div >
             <div className="mdc-layout-grid"id='intro' >
-              <p>
                 This is an animated visualization of Ebola confirmed cases in the North Kivu Ebola Outbreak in the Democratic Republic of the Congo (DRC).
-              </p>
-              <ul>
-                <li>
-                  <a href='https://github.com/mikefab/viz4good'>code base</a>
-                </li>
-                <li>
-                  <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>border file</a>
-                </li>
-              </ul>
-
-              The data was last fetched from <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchanage</a> on {created_at}.
-              <br />
+                &nbsp;Here is the <a href='https://github.com/mikefab/viz4good'>code base</a> and <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>border file</a>.
+              &nbsp;The data was last fetched from <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchanage</a> on {created_at}.&nbsp;
               <button className="mdc-button" onClick={this._refreshData}>
                 <div className="mdc-button__ripple"></div>
                 <span className="mdc-button__label">Click to fetch latest version</span>
