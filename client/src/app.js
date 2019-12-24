@@ -23,7 +23,8 @@ class App extends Component {
           e[0] = lookup[e[0]]
         }
       })
-      let refreshed_at = !!refresh ? "Last refreshed at: " + keplerJson.info.created_at : null
+      let refreshed_at = !!refresh ? "Last refreshed at: " +
+      new Date(Date.parse(keplerJson.info.created_at)).toUTCString() : null
       thing.state.keplerJson = keplerJson
       console.log('about to render!')
       thing.setState({
@@ -71,21 +72,20 @@ class App extends Component {
               </p>
               <ul>
                 <li>
-                  Data: <a href='https://data.humdata.org/'>The Humanitarian Data Exchange</a>
-                </li>
-                <li>
                   <a href='https://github.com/mikefab/viz4good'>code base</a>
                 </li>
                 <li>
-                  <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>border</a>
+                  <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>border file</a>
                 </li>
-                </ul>
-                The data was last fetched on {created_at}.
-                <button className="mdc-button" onClick={this._refreshData}>
-                  <div className="mdc-button__ripple"></div>
-                  <span className="mdc-button__label">Click here to fetch again.</span>
-                </button>
-                &nbsp; {refreshed_at}
+              </ul>
+
+              The data was last fetched from <a href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchanage</a> on {created_at}.
+              <br />
+              <button className="mdc-button" onClick={this._refreshData}>
+                <div className="mdc-button__ripple"></div>
+                <span className="mdc-button__label">Click to fetch latest version</span>
+              </button>
+              &nbsp; {refreshed_at}
 
             </div>
             <App1 keplerJson={keplerJson}  introHeight={introHeight}/>
