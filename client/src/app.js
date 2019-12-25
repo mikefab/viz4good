@@ -88,6 +88,7 @@ class App extends Component {
               <Dialog open={isOpen}>
                 <DialogTitle>Ebola confirmed cases visualization</DialogTitle>
                 <DialogContent className='mdc-dialog--scrollable'>
+		  <br/>
                   <div>
                     The data displayed in this map was last fetched from <a target='_blank' href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchange</a> on <strong>{created_at}</strong>. They update it every few days.
                     Click
@@ -112,6 +113,9 @@ class App extends Component {
                       <li>
                         You'll have to zoom out a bit to see all areas with cases.
                       </li>
+		      <li>
+		        Also, please see the image below...
+		      </li>
                     </ul>
                     <img src='/images/Ebola_Confirmed_Cases__DRC_.jpg' width='400'/>
                   </div>
