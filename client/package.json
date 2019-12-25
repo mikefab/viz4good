@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@material/layout-grid": "^4.0.0",
+    "@material/react-dialog": "^0.15.0",
     "d3-request": "^1.0.6",
     "dotenv": "^8.2.0",
     "dropbox": "^4.0.12",
