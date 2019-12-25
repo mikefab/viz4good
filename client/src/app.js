@@ -88,31 +88,33 @@ class App extends Component {
               <Dialog open={isOpen}>
                 <DialogTitle>Ebola confirmed cases visualization</DialogTitle>
                 <DialogContent className='mdc-dialog--scrollable'>
-                  The data displayed in this map was last fetched from <a target='_blank' href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchange</a> on <strong>{created_at}</strong>. They update it every few days.
-                  Click
-                  <button className="mdc-button" onClick={this._refreshData}>
-                    <div className="mdc-button__ripple"></div>
-                    <span className="mdc-button__label"> here </span>
-                  </button>
-                  to fetch latest data.
-                  <div style={{height: '15px'}}>
-                    <strong>
-                      {refreshed_at}
-                    </strong>
+                  <div>
+                    The data displayed in this map was last fetched from <a target='_blank' href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchange</a> on <strong>{created_at}</strong>. They update it every few days.
+                    Click
+                    <button className="mdc-button" onClick={this._refreshData}>
+                      <div className="mdc-button__ripple"></div>
+                      <span className="mdc-button__label"> here </span>
+                    </button>
+                    to fetch latest data.
+                    <div style={{height: '15px'}}>
+                      <strong>
+                        {refreshed_at}
+                      </strong>
+                    </div>
+                    <br/>
+                    The code for this app can be found <a target='_blank' href='https://github.com/mikefab/viz4good'>here</a>. The borderfile is <a target='_blank' href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>here</a>.
+                    <br/>
+                    <h3>Pro tips</h3>
+                    <ul>
+                      <li>
+                        The map might not show up on some android devices.
+                      </li>
+                      <li>
+                        You'll have to zoom out a bit to see all areas with cases.
+                      </li>
+                    </ul>
+                    <img src='/images/Ebola_Confirmed_Cases__DRC_.jpg' width='400'/>
                   </div>
-                  <br/>
-                  The code for this app can be found <a target='_blank' href='https://github.com/mikefab/viz4good'>here</a>. The borderfile is <a target='_blank' href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>here</a>.
-                <br/>
-                <h3>Pro tips</h3>
-                <ul>
-                  <li>
-                    The map might not show up on some android devices.
-                  </li>
-                  <li>
-                    You'll have to zoom out a bit to see all areas with cases.
-                  </li>
-                </ul>
-                <img src='/images/Ebola_Confirmed_Cases__DRC_.jpg' width='400'/>
                 </DialogContent>
                 <DialogFooter>
                   <DialogButton onClick={this._handleDialog}>Close</DialogButton>
