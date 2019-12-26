@@ -89,14 +89,10 @@ class App extends Component {
                 <DialogTitle>Ebola confirmed cases visualization</DialogTitle>
                 <DialogContent className='mdc-dialog--scrollable'>
 		  <br/>
-                  <div style={{fontSize: '16px'}}>
+                  <div>
                     The data displayed in this map was last fetched from <a target='_blank' href='https://data.humdata.org/dataset/ebola-cases-and-deaths-drc-north-kivu'>The Humanitarian Data Exchange</a> on <strong>{created_at}</strong>. They update it every few days.
-                    Click
-                    <button className="mdc-button" onClick={this._refreshData}>
-                      <div className="mdc-button__ripple"></div>
-                      <span className="mdc-button__label"> here </span>
-                    </button>
-                    to fetch latest data.
+                    Click <a href='#' onClick={this._refreshData}>here</a> to fetch latest data.
+                    <br/>
                     <div style={{height: '15px'}}>
                       <strong>
                         {refreshed_at}
