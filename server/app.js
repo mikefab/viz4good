@@ -26,6 +26,7 @@ app.get("/api/refresh", (req, res, next) => {
       }
       return a;
     }, []).join('\r\n')
+
     csv().fromString(cleanCSV.toString()).then((jsonObj) => {
       const zone_names = jsonObj.reduce((h, e) =>
         {
@@ -62,7 +63,7 @@ app.get("/api/refresh", (req, res, next) => {
 
 
       let records = jsonObj.reduce((ary, e) => {
-        if (dict[e.health_zone]) {
+        if (dict[e.health_zone] && e.confirmed_cases > 0) {
           let f = dict[e.health_zone]
           e.publication_date = e.publication_date + ' 12:00:00.00'
           e.report_date = e.report_date + ' 12:00:00.00'
@@ -72,6 +73,7 @@ app.get("/api/refresh", (req, res, next) => {
             line = f.properties.cle
 
           } else {
+            //console.log(JSON.stringify(f))
             seen[f.properties.cle] = JSON.stringify(f)
             line = seen[f.properties.cle]
           }
