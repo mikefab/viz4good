@@ -105,9 +105,28 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.keplerJson !== this.props.keplerJson) {
       const data = Processor.processKeplerglJSON(this.props.keplerJson);
+      let fields = data.datasets[0].data.fields.reduce((s, f) => { s = s + f.name + ','; return s}, '').replace(/,$/, '')
+      let rows = data.datasets[0].data.rows.reduce((s, r, i) => { s = s + r + '\n'; return s}, '')
+      // let csv = "day2_geom" + '\n' + `"{""type"":""Feature"",""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-80.104522,40.428971],[-80.100849,40.430899],[-80.097777,40.428647],[-80.100942,40.425432],[-80.101408,40.42518],[-80.104522,40.428971]]]]},""properties"":{""MOVEMENT_ID"":""1"",""DISPLAY_NAME"":""300 Pennsview Court, Pittsburgh"",""GEOID10"":""42003459202""}}"`
+     let csv = fields + '\n' + `${rows.replace(/"/g, '""').replace(/\{""type"":""Feature""/g, '"{""type"":""Feature""').replace(/\]\]\]\}\}/g, ']]]}}"')}`
+      console.log(csv)
       this.props.dispatch(
-        addDataToMap(data)
+        addDataToMap({
+          datasets: [
+            {
+              info: {
+                label: 'Icon Data',
+                id: 'test_icon_data'
+              },
+              data: processCsvData(csv)
+            }
+          ]
+        })
       );
+
+      // this.props.dispatch(
+      //   addDataToMap(data)
+      // );
     }
       // const rect = ReactDOM
       //     .findDOMNode(this.targetHoopRef)
@@ -118,7 +137,9 @@ class App extends Component {
 
   //z.datasets[0].data.allData
 
-  // componentDidMount() {
+  componentDidMount() {
+    this._loadSampleData();
+    }
   //   // if we pass an id as part of the url
   //   // we ry to fetch along map configurations
   //   const {
@@ -183,7 +204,7 @@ class App extends Component {
   }
 
   _loadSampleData() {
-    this._loadPointData();
+    //this._loadPointData();
     // this._loadGeojsonData();
     // this._loadTripGeoJson();
     // this._loadIconData();
@@ -211,6 +232,7 @@ class App extends Component {
   }
 
   _loadIconData() {
+    console.log(sampleIconCsv)
     // load icon data and config and process csv file
     this.props.dispatch(
       addDataToMap({

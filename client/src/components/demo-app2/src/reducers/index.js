@@ -95,7 +95,7 @@ const demoReducer = combineReducers({
     // we are going to set the mapbox access token to be used
     // in the exported file
     uiState: {
-      readOnly: true,
+      readOnly: false,
       exportMap: {
         ...DEFAULT_EXPORT_MAP,
         [EXPORT_MAP_FORMATS.HTML]: {
