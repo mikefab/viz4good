@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "file": "^0.2.2",
     "fs": "0.0.1-security",
-    "json": "^9.0.6",
+    "json": "^10.0.0",
     "json-2-csv": "^3.5.7",
     "jsonfile": "^5.0.0",
     "node-fetch": "^2.6.0"
